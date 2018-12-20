@@ -5,7 +5,7 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
-            newRoomName: ""
+            newRoomName: '',
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -38,7 +38,7 @@ class RoomList extends Component {
         return (
             <div className="roomlist">
                 <div>
-                    {this.state.rooms.map((room) => <li key={room.key}>{room.name}</li>)}
+                    {this.state.rooms.map((room) => <ul key={room.key}>{room.name}</ul>)}
                 </div>
             <form className="submit" onChange={this.onChange}>
                 <button type="submit">
