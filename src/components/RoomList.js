@@ -32,7 +32,6 @@ class RoomList extends Component {
         console.log("submitted");
     }
 
-
     render() {
         return (
             <div className="roomlist">
