@@ -6,7 +6,6 @@ class MessageList extends Component {
 		this.state = {
 			messages: [],
 			message: '',
-
 		};
 
         this.messagesRef = this.props.firebase.database().ref('messages');	
@@ -17,12 +16,13 @@ class MessageList extends Component {
 	componentDidMount() {
 		console.log("componentDidMount");
 		this.messageListRef.on('child_added', snapshot => {
-        	const message = snapshot.val();
+        	const newMessage = snapshot.val();
             message.key = snapshot.key;
-            this.setState({ messages:this.state.messages.concat(message) });
+            this.setState({ messages:this.state.messages.concat(newMessage) });
         })
 
-    updateMessage () => {event;
+    updateMessage(event){
+    	console.log("updateMessage: " +event.target.value);
     	event.preventDefault();
     	this.setState({
     		message: event.target.value;
@@ -32,12 +32,8 @@ class MessageList extends Component {
     submitMessage(event){
     	event.preventDefault();
     	console.log('submitMessage: '+this.state.message);
-    	const nextMessage={
-    		id: this.state.messages.length,
-    		text: this.state.message
-    	}
-
-    	this.roomsref = this.props.firebase.database().ref('messages');
+		this.messagesref.push(this.state.nextMessage)
+    	this.setState('message')}
 		// var list = Object.assign([], this.state.messages)
 		// list.push(nextMessage)
 		// this.setState({
@@ -53,22 +49,22 @@ class MessageList extends Component {
     			)
     	})
 
-    	return (
-    			<div>
+       return (
+            <div className="messagelist">
+                <div>
+                    {this.state.messages.map((message) => <ul key={message.key}>{message.name}</ul>)}
+                </div>
+            <form className="createMessage" onSubmit={this.newMessage}>
+                <button type="submit">
+                    New Message
+                </button>
+                <input type = "text" placeholder="New Message" value={this.messages} updateMessage={this.updateMessage }/>
+            </form>
+            </div>
 
-    				<ol>
-    					{currentMessage}
-    				</ol>
 
-    				<input onChange={this.updateMessage} type = "text" placeholder="Message"/>
-
-    				<br/>
-
-    				<button onClick={this.submitMessage}>Submit</button>
-    			</div>
-    		)
+        );
     }
-
 }
 
 export default MessageList;
