@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import RoomList from './components/RoomList';
 
 class MessageList extends Component {
 	constructor(props, context){ 
@@ -7,6 +6,10 @@ class MessageList extends Component {
 		this.state = {
 			messages: [],
 			message: '',
+			username:'',
+			content:'',
+			roomId:'',
+			sentAt:''
 		};
 
         this.messagesRef = this.props.firebase.database().ref('messages');	
@@ -16,9 +19,9 @@ class MessageList extends Component {
 
 	componentDidMount() {
 		console.log("componentDidMount");
-		this.messageListRef.on('child_added', snapshot => {
+		this.messagesRef.on('child_added', snapshot => {
         	const newMessage = snapshot.val();
-            message.key = snapshot.key();
+            newMessage.key = snapshot.key;
             this.setState({ messages:this.state.messages.concat(newMessage) });
         
         });
@@ -27,15 +30,14 @@ class MessageList extends Component {
     updateMessage(event){
     	event.preventDefault();
     	this.setState({message: event.target.value})
-    	console.log("updateMessage: " +event.target.value);
-
+    	console.log("text" +event.target.value);
     };
 
     submitMessage(event){
     	event.preventDefault();
-    	console.log('submitMessage: '+this.state.message);
-		this.messagesref.push(this.state.nextMessage)
-    	this.setState('message')}
+		this.messagesRef.push({name:this.state.message});
+    	this.setState({message:''});
+    	console.log('submitted: '+this.state.message);
 	};
 
     render(){
@@ -47,9 +49,9 @@ class MessageList extends Component {
                 </div>
             <form className="createMessage" onSubmit={this.submitMessage}>
                 <button type="submit">
-                    New Message
+                    Submit
                 </button>
-                <input type = "text" placeholder="New Message" value={this.messages} updateMessage={this.updateMessage }/>
+                <input type = "text" placeholder="New Message" value={this.message} updateMessage={this.updateMessage }/>
             </form>
             </div>
 

@@ -5,7 +5,6 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
-            newRoomName: '',
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -17,21 +16,26 @@ class RoomList extends Component {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
-            this.setState({ rooms: this.state.rooms.concat(room) });
+            this.setState({ 
+                rooms: this.state.rooms.concat(room) 
+            });
         });
     }
 
-    onChange(event){
-        event.preventDefault();
-        this.setState({newRoomName: event.target.value})
-        console.log("text");
+    onChange(e){
+        this.setState({
+            newRoomName: e.target.value
+        })
     }
 
-    newRoom(event){
-        event.preventDefault();
-        this.roomsRef.push({name: this.state.newRoomName});
-        this.setState({newRoomName:''});
-        console.log('submitted');
+    newRoom(e){
+        this.roomsRef.push({
+            name: this.state.newRoomName
+        });
+        e.preventDefault();
+        this.setState({
+            newRoomName:''
+        });
     }
 
 
@@ -41,11 +45,9 @@ class RoomList extends Component {
                 <div>
                     {this.state.rooms.map((room) => <ul key={room.key}>{room.name}</ul>)}
                 </div>
-            <form className="createRoom" onSubmit={this.newRoom}>
-                <button type="submit">
-                    New Room
-                </button>
-                <input type = "text" placeholder="New Room" value={this.newRoomName} onChange={this.onChange }/>
+            <form className="createRoom" onSubmit={(e)=> this.newRoom(e)}>
+                <input type = "text" placeholder="Chatroom Name" value={this.state.newRoomName} onChange={(e) => this.onChange(e)}/>
+                <input type="submit" value="Submit"/>
             </form>
             </div>
 

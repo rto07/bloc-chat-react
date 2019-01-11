@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 
-var config1 = {
+var config = {
     apiKey: "AIzaSyA1UyUR8tl0rcY3iSmSy0BZ4ag1q_ZNOSo",
     authDomain: "bloc-chat-1234f-26340.firebaseapp.com",
     databaseURL: "https://bloc-chat-1234f-26340.firebaseio.com",
@@ -12,21 +12,23 @@ var config1 = {
     storageBucket: "bloc-chat-1234f-26340.appspot.com",
     messagingSenderId: "562699450906"
   };
-  firebase.initializeApp(config1);
+  firebase.initializeApp(config);
 
-
- var config2 = {
-    apiKey: "AIzaSyD2PXlAOqGFdtOOhwiuIi613_H_0VLc2Lc",
-    authDomain: "bloc-chat-messages.firebaseapp.com",
-    databaseURL: "https://bloc-chat-messages.firebaseio.com",
-    projectId: "bloc-chat-messages",
-    storageBucket: "bloc-chat-messages.appspot.com",
-    messagingSenderId: "884012391863"
-  };
-  firebase.initializeApp(config2);
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      activeRoom:''
+    };
+
+    this.setActiveRoom=this.setActiveRoom.bind(this);
+  }
+
+  setActiveRoom(room){
+    this.setState({activeRoom:room,})
+  };
 
   render() {
     return (
@@ -36,11 +38,23 @@ class App extends Component {
         </header>
 
         <main>
-          <RoomList firebase={firebase} />
-          <MessageList firebase={firebase} />
+        <div className="rooms">
+          <RoomList firebase={firebase} 
+          activeRoom={this.state.activeRoom}
+          setActiveRoom={this.setActiveRoom}
+          />
+        </div>
 
+
+        <div className='messageList'>
+          <messageList firebase={firebase} 
+          activeRoom={this.state.activeRoom}
+          setActiveRoom={this.setActiveRoom}
+          />
+        </div>
         </main>
       </div>
+
     );
   }
 }
