@@ -27,31 +27,37 @@ class App extends Component {
   }
 
   setActiveRoom(room){
-    this.setState({activeRoom:room,})
+    this.setState({
+      activeRoom:room,
+    })
   };
 
   render() {
     return (
       <div className="App">
         <header>
-          Bloc Chat React
+          <h1>
+            Bloc Chat React
+          </h1>
         </header>
 
         <main>
-        <div className="rooms">
-          <RoomList firebase={firebase} 
-          activeRoom={this.state.activeRoom}
-          setActiveRoom={this.setActiveRoom}
-          />
-        </div>
+          <div className='rooms'>
+            <div className='roomList'>
+              <RoomList firebase={firebase} 
+              activeRoom={this.state.activeRoom}
+              setActiveRoom={this.setActiveRoom}
+              />
+            </div>
 
 
-        <div className='messageList'>
-          <messageList firebase={firebase} 
-          activeRoom={this.state.activeRoom}
-          setActiveRoom={this.setActiveRoom}
-          />
-        </div>
+            <div className='messageList'>
+              <MessageList firebase={firebase} 
+              activeRoom={this.state.activeRoom}
+              setActiveRoom={this.setActiveRoom}
+              />
+            </div>
+          </div>
         </main>
       </div>
 

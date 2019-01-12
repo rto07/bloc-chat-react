@@ -5,14 +5,16 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
+            newChatroom:{value:''}
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
-        this.onChange = this.onChange.bind(this);
-        this.newRoom = this.newRoom.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
+        console.log("componentDidMount");
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
@@ -22,20 +24,32 @@ class RoomList extends Component {
         });
     }
 
-    onChange(e){
-        this.setState({
-            newRoomName: e.target.value
-        })
-    }
+    // handleChange(e){
+    //     console.log('text '+e.target.value);
+    //     this.setState({
+    //         newChatroom: e.target.value
+    //     })
+    // }
 
-    newRoom(e){
+    handleSubmit(e){
+        this.setState({
+            newChatroom:e.target.value
+        });
+    };
+
+    handleChange(e){
         this.roomsRef.push({
-            name: this.state.newRoomName
+            name: this.state.newChatroom
         });
         e.preventDefault();
         this.setState({
-            newRoomName:''
-        });
+            newChatroom:''
+        })
+        console.log('A new room was submitted');
+    };
+
+    handleClick(room) {
+        this.props.setActiveRoom(room);
     }
 
 
@@ -43,10 +57,15 @@ class RoomList extends Component {
         return (
             <div className="roomlist">
                 <div>
-                    {this.state.rooms.map((room) => <ul key={room.key}>{room.name}</ul>)}
+                  <li className="list-group">
+                    {this.state.rooms.map((room) => <li className="list-group-item-primary" key={room.name}
+                        onClick={() => this.handleClick(room)}>{room.name}</li>)}
+                    </li>                
                 </div>
-            <form className="createRoom" onSubmit={(e)=> this.newRoom(e)}>
-                <input type = "text" placeholder="Chatroom Name" value={this.state.newRoomName} onChange={(e) => this.onChange(e)}/>
+            
+            <form className="createRoom" onSubmit={(e)=> this.handleSubmit(e)}>
+                <input type = "text" placeholder="Chatroom Name" value={this.state.newChatroom} onChange={this.handleChange
+                }/>
                 <input type="submit" value="Submit"/>
             </form>
             </div>
