@@ -20,7 +20,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      activeRoom:''
+      activeRoom:'',
     };
 
     this.setActiveRoom=this.setActiveRoom.bind(this);
@@ -41,13 +41,14 @@ class App extends Component {
           </h1>
         </header>
 
-        <main>
+       
           <div className='rooms'>
-            <div className='roomList'>
+            <div>
               <RoomList firebase={firebase} 
-              activeRoom={this.state.activeRoom}
-              setActiveRoom={this.setActiveRoom}
-              />
+                activeRoom={this.state.activeRoom}
+                setActiveRoom={this.setActiveRoom}
+                />
+              </div>
             </div>
 
 
@@ -57,9 +58,9 @@ class App extends Component {
               setActiveRoom={this.setActiveRoom}
               />
             </div>
-          </div>
-        </main>
+ 
       </div>
+
 
     );
   }

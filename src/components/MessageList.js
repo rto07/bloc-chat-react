@@ -11,7 +11,8 @@ class MessageList extends Component {
 			sentAt:''
 		};
 
-        this.messagesRef = this.props.firebase.database().ref('messages');	
+        this.messagesRef = this.props.firebase.database().ref('messages');
+       this.sentAt = this.props.firebase.database.ServerValue.TIMESTAMP	
   //       this.updateMessage = this.updateMessage.bind(this)
 		// this.submitMessage = this.submitMessage.bind(this)
     };
@@ -45,12 +46,13 @@ class MessageList extends Component {
             <div>
                 <h3>Messages</h3>
                 <ul className="list message">
-                    {this.state.messages.filter(message => message.roomId === this.props.activeRoom.key).map((message, index) =>
+                    {this.state.messages.filter(
+                        message => message.roomId === this.props.activeRoom.key).map((message, index) =>
                         <div key={index}>
-                            	{message.content}
-                            	{message.username}
-                            	{message.roomId}
-								{message.sentAt}
+                            {message.content}
+                            {message.username}
+                            {message.roomId}
+							{message.sentAt}
                         </div>
                     )}
                 </ul>

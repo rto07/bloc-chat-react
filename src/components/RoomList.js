@@ -5,7 +5,10 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
-            newChatroom:{value:''}
+            newChatroom:{
+                value:''
+            }
+            
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -16,8 +19,8 @@ class RoomList extends Component {
     componentDidMount() {
         console.log("componentDidMount");
         this.roomsRef.on('child_added', snapshot => {
-            const room = snapshot.val();
-            room.key = snapshot.key;
+            const room = snapshot.val(),
+            key = snapshot.key;
             this.setState({ 
                 rooms: this.state.rooms.concat(room) 
             });
@@ -41,9 +44,8 @@ class RoomList extends Component {
         this.roomsRef.push({
             name: this.state.newChatroom
         });
-        e.preventDefault();
         this.setState({
-            newChatroom:''
+            newChatroom:[]
         })
         console.log('A new room was submitted');
     };
@@ -57,10 +59,10 @@ class RoomList extends Component {
         return (
             <div className="roomlist">
                 <div>
-                  <li className="list-group">
-                    {this.state.rooms.map((room) => <li className="list-group-item-primary" key={room.name}
+                  <ul className="list-group">
+                    {this.state.rooms.map((room, i) => <li className="list-group-item-primary" key={i}
                         onClick={() => this.handleClick(room)}>{room.name}</li>)}
-                    </li>                
+                    </ul>                
                 </div>
             
             <form className="createRoom" onSubmit={(e)=> this.handleSubmit(e)}>
