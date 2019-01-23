@@ -5,10 +5,7 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
-            newChatroom:{
-                value:''
-            }
-            
+            newChatroom:''     
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -19,39 +16,38 @@ class RoomList extends Component {
     componentDidMount() {
         console.log("componentDidMount");
         this.roomsRef.on('child_added', snapshot => {
-            const room = snapshot.val(),
-            key = snapshot.key;
+            const room = snapshot.val();
+            room.key = snapshot.key;
             this.setState({ 
                 rooms: this.state.rooms.concat(room) 
             });
         });
     }
 
-    // handleChange(e){
-    //     console.log('text '+e.target.value);
-    //     this.setState({
-    //         newChatroom: e.target.value
-    //     })
-    // }
-
-    handleSubmit(e){
+    handleChange(event){
+        event.preventDefault();
         this.setState({
-            newChatroom:e.target.value
-        });
+            newChatroom:event.target.value
+        })
+        console.log(event.target.value);
     };
 
-    handleChange(e){
+    handleSubmit(event){
+        event.preventDefault();
         this.roomsRef.push({
             name: this.state.newChatroom
         });
+        
         this.setState({
-            newChatroom:[]
-        })
-        console.log('A new room was submitted');
+            newChatroom:''
+        });
+
+        console.log('submitted: '+this.state.newChatroom);
     };
 
-    handleClick(room) {
+    selectRoom(room) {
         this.props.setActiveRoom(room);
+        console.log('Chatroom selected');
     }
 
 
@@ -61,14 +57,12 @@ class RoomList extends Component {
                 <div>
                   <ul className="list-group">
                     {this.state.rooms.map((room, i) => <li className="list-group-item-primary" key={i}
-                        onClick={() => this.handleClick(room)}>{room.name}</li>)}
+                        onClick={() => this.selectRoom(room)}>{(room.name)}</li>)}
                     </ul>                
                 </div>
             
-            <form className="createRoom" onSubmit={(e)=> this.handleSubmit(e)}>
-                <input type = "text" placeholder="Chatroom Name" value={this.state.newChatroom} onChange={this.handleChange
-                }/>
-                <input type="submit" value="Submit"/>
+            <form className="createRoom" onSubmit={(event)=> this.handleSubmit(event)}>
+                <input type = "text" placeholder="Chatroom Name" value = {this.state.newChatroom} onChange = {this.handleChange}/> <input type="submit" value="Submit"/>
             </form>
             </div>
 
