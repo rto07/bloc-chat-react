@@ -30,6 +30,7 @@ class App extends Component {
     this.setState({
       activeRoom:room,
     })
+    console.log(room);
   };
 
   render() {

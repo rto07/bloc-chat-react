@@ -45,11 +45,6 @@ class RoomList extends Component {
         console.log('submitted: '+this.state.newChatroom);
     };
 
-    selectRoom(room) {
-        this.props.setActiveRoom(room);
-        console.log('Chatroom selected');
-    }
-
 
     render() {
         return (
@@ -57,7 +52,7 @@ class RoomList extends Component {
                 <div>
                   <ul className="list-group">
                     {this.state.rooms.map((room, i) => <li className="list-group-item-primary" key={i}
-                        onClick={() => this.selectRoom(room)}>{(room.name)}</li>)}
+                        onClick={() => this.props.setActiveRoom(room)}>{(room.name)}</li>)}}
                     </ul>                
                 </div>
             
