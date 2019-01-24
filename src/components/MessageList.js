@@ -5,14 +5,11 @@ class MessageList extends Component {
 		super(props);
 		this.state = {
 			messages: [],
-			username:'<Username here>',
-			content:'<Content of the message here>',
-			roomId:'<Room UID Here>',
-			sentAt:'<Time message was sent here>'
+            newMessage:''
 		};
 
         this.messagesRef = this.props.firebase.database().ref('messages');
-        //this.sentAt = this.props.firebase.database.ServerValue.TIMESTAMP	
+        //this.sentAt = this.props.firebase.database.ServerValue.TIMESTAMP
         this.updateMessage = this.updateMessage.bind(this)
 		this.submitMessage = this.submitMessage.bind(this)
     };
@@ -30,15 +27,21 @@ class MessageList extends Component {
 
     updateMessage(event){
     	event.preventDefault();
-    	this.setState({message: event.target.value})
+    	this.setState({
+            newMessage: event.target.value
+        })
     	console.log(event.target.value);
     };
 
     submitMessage(event){
     	event.preventDefault();
-		this.messagesRef.push({message:this.state.message});
-    	 //this.setState({message:''});
-    	console.log('submitted: '+this.state.message);
+		this.messagesRef.push({
+            message:this.state.newMessage
+        });
+    	this.setState({
+            newMessage:''
+        });
+    	console.log('submitted: '+this.state.newMessage);
 	};
 
     render() {
@@ -46,21 +49,17 @@ class MessageList extends Component {
             <div className='messageList'>
                 <div>
                     <h3>Messages</h3>
-                    <ul className="message group">
+                    <ul className="newMessage group">
                     {this.state.messages.filter(
                         message => message.roomId === this.props.activeRoom.key).map((message, index) =>
                             <div key={index}>
-                                {message.content},
-                                {message.username},
-                                {message.roomId},
-        						{message.sentAt}
                             </div>
                     )}
                     </ul>
                 </div>
 
                 <form className="createmessage" onSubmit={(event)=> this.submitMessage(event)}>
-                    <input type = "text" placeholder = "New Message" value = {this.state.message} onChange = {this.updateMessage}/>
+                    <input type = "text" placeholder = "New Message" value = {this.state.newMessage} onChange = {this.updateMessage}/>
 
                     <input type="submit" value="Submit"
                     />
