@@ -5,12 +5,13 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
-            newChatroom:''     
+            newChatroom:'',
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.clickRoom = this.clickRoom.bind(this);
     }
 
     componentDidMount() {
@@ -45,20 +46,36 @@ class RoomList extends Component {
         console.log('submitted: '+this.state.newChatroom);
     };
 
+    clickRoom(event) {
+        event.preventDefault();
+        this.props.setActiveRoom(this.roomsRef.child(event.target.textContent));
+    }
+
+
+
 
     render() {
         return (
             <div className="roomlist">
+
                 <div>
+
                   <ul className="list-group">
-                    {this.state.rooms.map((room, i) => <li className="list-group-item-primary" key={i}
-                        onClick={() => this.props.setActiveRoom(room)}>{(room.name)}</li>)}}
-                    </ul>                
+                    
+                    {this.state.rooms.map((room, index) => <li key={index}
+                        onClick={this.clickRoom}>{room.name}
+                    </li>)}
+
+                    </ul> 
+
                 </div>
             
-            <form className="createRoom" onSubmit={(event)=> this.handleSubmit(event)}>
-                <input type = "text" placeholder="Chatroom Name" value = {this.state.newChatroom} onChange = {this.handleChange}/> <input type="submit" value="Submit"/>
-            </form>
+                <form className="createRoom" onSubmit={(event)=> this.handleSubmit(event)}>
+
+                    <input type = "text" placeholder="Chatroom Name" value = {this.state.newChatroom} onChange = {(event)=>this.handleSubmit(event)}/> 
+
+                    <input type="submit" value="Submit"/>
+                </form>
             </div>
 
 

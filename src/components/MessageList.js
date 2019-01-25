@@ -17,19 +17,17 @@ class MessageList extends Component {
 	componentDidMount() {
 		console.log("componentDidMount");
 		this.messagesRef.on('child_added', snapshot => {
-        	const message = snapshot.val();
-                message.key = snapshot.key;
+        	const newMessage = snapshot.val();
+                newMessage.key = snapshot.key;
         this.setState({ 
-            	messages:this.state.messages.concat(message) 
+            	messages:this.state.messages.concat(newMessage) 
             });
         });
 	};
 
     updateMessage(event){
     	event.preventDefault();
-    	this.setState({
-            newMessage: event.target.value
-        })
+    	this.setState({newMessage: event.target.value})
     	console.log(event.target.value);
     };
 
@@ -51,7 +49,7 @@ class MessageList extends Component {
                     <h3>Messages</h3>
                     <ul className="newMessage group">
                     {this.state.messages.filter(
-                        message => message.roomId === this.props.activeRoom.key).map((message, index) =>
+                        newMessage => newMessage.roomId === this.props.activeRoom.key).map((newMessage, index) =>
                             <div key={index}>
                             </div>
                     )}
