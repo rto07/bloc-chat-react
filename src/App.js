@@ -20,7 +20,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      activeRoom:'',
+      activeRoom:''
     };
 
     this.setActiveRoom=this.setActiveRoom.bind(this);
@@ -32,6 +32,15 @@ class App extends Component {
     })
     console.log(room);
   };
+
+// Create a component for holding a list of messages alongside the list of available chat rooms. (MessageList.js)
+
+// The active room should be stored in the App component's state object so that the title of the active room changes every time you visit a different room.
+
+// The active room should be stored in App so that it's available throughout the app – both in RoomList, so that it can highlight the active room, and  MessageList, where it will filter results by the ID of the active room.
+
+// The active room should be triggered by clicking on the name of the room in the RoomList component.
+
 
   render() {
     return (

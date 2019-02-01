@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
+
 class RoomList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             rooms: [],
-            newChatroom:'',
+            newChatroom:''
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -17,8 +18,7 @@ class RoomList extends Component {
     componentDidMount() {
         console.log("componentDidMount");
         this.roomsRef.on('child_added', snapshot => {
-            const room = snapshot.val();
-            room.key = snapshot.key;
+            const room = { key: snapshot.key, value: snapshot.val() };
             this.setState({ 
                 rooms: this.state.rooms.concat(room) 
             });
@@ -46,9 +46,8 @@ class RoomList extends Component {
         console.log('submitted: '+this.state.newChatroom);
     };
 
-    clickRoom(event) {
-        event.preventDefault();
-        this.props.setActiveRoom(this.roomsRef.child(event.target.textContent));
+    clickRoom(room) {
+        this.props.setActiveRoom(room);
     }
 
 
@@ -62,8 +61,8 @@ class RoomList extends Component {
 
                   <ul className="list-group">
                     
-                    {this.state.rooms.map((room, index) => <li key={index}
-                        onClick={this.clickRoom}>{room.name}
+                    {this.state.rooms.map((room, roomId) => <li key={roomId}
+                        onClick={() => this.clickRoom(room)}>{roomId.name}
                     </li>)}
 
                     </ul> 
@@ -72,7 +71,7 @@ class RoomList extends Component {
             
                 <form className="createRoom" onSubmit={(event)=> this.handleSubmit(event)}>
 
-                    <input type = "text" placeholder="Chatroom Name" value = {this.state.newChatroom} onChange = {(event)=>this.handleSubmit(event)}/> 
+                    <input type = "text" placeholder="Chatroom Name" value = {this.state.handleChange} onChange = {(room)=>this.handleChange(window.event)}/> 
 
                     <input type="submit" value="Submit"/>
                 </form>
