@@ -26,11 +26,11 @@ class App extends Component {
     this.setActiveRoom=this.setActiveRoom.bind(this);
   }
 
-  setActiveRoom(room){
+  setActiveRoom(clickedRoom){
     this.setState({
-      activeRoom:room,
+      activeRoom:clickedRoom,
     })
-    console.log(room);
+    console.log(clickedRoom);
   };
 
 // Create a component for holding a list of messages alongside the list of available chat rooms. (MessageList.js)
@@ -56,6 +56,7 @@ class App extends Component {
             <div>
               <RoomList firebase={firebase} 
                 setActiveRoom={this.setActiveRoom}
+                firebase={firebase}
                 />
               </div>
             </div>
@@ -64,6 +65,7 @@ class App extends Component {
             <div className='messageList'>
               <MessageList firebase={firebase} 
               activeRoom={this.state.activeRoom}
+              firebase={firebase}
               />
             </div>
  

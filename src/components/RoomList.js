@@ -18,6 +18,7 @@ class RoomList extends Component {
     componentDidMount() {
         console.log("componentDidMount");
         this.roomsRef.on('child_added', snapshot => {
+           
             const room = { key: snapshot.key, value: snapshot.val() };
             this.setState({ 
                 rooms: this.state.rooms.concat(room) 
@@ -47,7 +48,7 @@ class RoomList extends Component {
     };
 
     clickRoom(room) {
-        this.props.setActiveRoom(room);
+        this.props.setActiveRoom(room.name);
     }
 
 

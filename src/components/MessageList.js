@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class MessageList extends Component {
 	constructor(props){ 
 		super(props);
+
 		this.state = {
 			messages: [],
             newMessage:''
@@ -16,7 +17,10 @@ class MessageList extends Component {
 	componentDidMount() {
 		console.log("componentDidMount");
 		this.messagesRef.on('child_added', snapshot => {
-        	const message = { key: snapshot.key, value: snapshot.val() };
+        	
+            const message =  
+                snapshot.val();
+                message.key=snapshot.key;
         this.setState({ 
             	messages:this.state.messages.concat(message) 
             });
