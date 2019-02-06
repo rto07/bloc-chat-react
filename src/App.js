@@ -20,7 +20,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      activeRoom:''
+      activeRoom:"",
+      activeRoomId:''
     };
 
     this.setActiveRoom=this.setActiveRoom.bind(this);
@@ -28,8 +29,11 @@ class App extends Component {
 
   setActiveRoom(clickedRoom){
     this.setState({
-      activeRoom:clickedRoom,
-    })
+      activeRoom:clickedRoom.name
+    });
+    this.setState({
+      activeRoomId:clickedRoom.name
+    });
     console.log(clickedRoom);
   };
 
@@ -46,28 +50,28 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>
+          <h2>
             Bloc Chat React
-          </h1>
+          </h2>
         </header>
 
        
-          <div className='rooms'>
-            <div>
-              <RoomList firebase={firebase} 
-                setActiveRoom={this.setActiveRoom}
-                firebase={firebase}
-                />
-              </div>
-            </div>
+          <div className='roomList'>
+            <RoomList 
+              setActiveRoom={
+                this.setActiveRoom.bind(this)}
+              firebase={firebase}/>
+          </div>
 
 
-            <div className='messageList'>
-              <MessageList firebase={firebase} 
-              activeRoom={this.state.activeRoom}
-              firebase={firebase}
-              />
-            </div>
+          <div className='messageList'>
+              <MessageList
+                activeRoom={
+                  this.state.activeRoom}
+                activeRoomId={
+                  this.state.activeRoomId}
+                firebase={firebase}/>
+          </div>
  
       </div>
 

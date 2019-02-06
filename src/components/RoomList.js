@@ -4,22 +4,20 @@ import React, { Component } from 'react';
 class RoomList extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             rooms: [],
             newChatroom:''
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.clickRoom = this.clickRoom.bind(this);
     }
 
     componentDidMount() {
         console.log("componentDidMount");
         this.roomsRef.on('child_added', snapshot => {
-           
-            const room = { key: snapshot.key, value: snapshot.val() };
+            const room = snapshot.val();
+            room.key = snapshot.key;
             this.setState({ 
                 rooms: this.state.rooms.concat(room) 
             });
@@ -34,8 +32,7 @@ class RoomList extends Component {
         console.log(event.target.value);
     };
 
-    handleSubmit(event){
-        event.preventDefault();
+    handleSubmit(newChatroom){
         this.roomsRef.push({
             name: this.state.newChatroom
         });
@@ -52,36 +49,45 @@ class RoomList extends Component {
     }
 
 
-
-
     render() {
         return (
-            <div className="roomlist">
+    <React.Fragment>
 
-                <div>
+        <div className="listOfRooms">
+          {this.state.rooms.map((room, i) => (
+            <a key={i} onClick={() => this.props.setActiveRoom(room)}>
+            {room.name}<br/></a>
+          ))}
 
-                  <ul className="list-group">
-                    
-                    {this.state.rooms.map((room, roomId) => <li key={roomId}
-                        onClick={() => this.clickRoom(room)}>{roomId.name}
-                    </li>)}
+        </div>
 
-                    </ul> 
+        <div className="form">
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+                this.handleSubmit(this.state.newChatroom);
+              }}>
+        
+            <input
 
-                </div>
-            
-                <form className="createRoom" onSubmit={(event)=> this.handleSubmit(event)}>
+              type="text"
+              id="roomName"
+              value={this.state.newChatroom}
+              placeholder="Chatroom"
+              onChange={e => this.handleChange(e)}
 
-                    <input type = "text" placeholder="Chatroom Name" value = {this.state.handleChange} onChange = {(room)=>this.handleChange(window.event)}/> 
+            />
 
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
+            <input type="submit"/>
 
+          </form>
+        </div>
 
-        );
-    }
-}
+    </React.Fragment>
+
+    )
+   }
+  }
 
 
 export default RoomList;
