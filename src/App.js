@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
+import 'firebase/auth';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
+import User from './components/User';
 
 var config = {
     apiKey: "AIzaSyA1UyUR8tl0rcY3iSmSy0BZ4ag1q_ZNOSo",
@@ -21,7 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom:"",
-      activeRoomId:''
+      activeUser:null,
     };
 
     this.setActiveRoom=this.setActiveRoom.bind(this);
@@ -31,19 +33,11 @@ class App extends Component {
     this.setState({
       activeRoom:clickedRoom.name
     });
-    this.setState({
-      activeRoomId:clickedRoom.name
-    });
     console.log(clickedRoom);
   };
 
-// Create a component for holding a list of messages alongside the list of available chat rooms. (MessageList.js)
+  
 
-// The active room should be stored in the App component's state object so that the title of the active room changes every time you visit a different room.
-
-// The active room should be stored in App so that it's available throughout the app – both in RoomList, so that it can highlight the active room, and  MessageList, where it will filter results by the ID of the active room.
-
-// The active room should be triggered by clicking on the name of the room in the RoomList component.
 
 
   render() {
@@ -68,11 +62,16 @@ class App extends Component {
               <MessageList
                 activeRoom={
                   this.state.activeRoom}
-                activeRoomId={
-                  this.state.activeRoomId}
                 firebase={firebase}/>
           </div>
  
+          <div className='user'>
+              <User
+                activeUser={
+                  this.state.activeUser}
+                firebase={firebase}/>
+          </div>
+
       </div>
 
 

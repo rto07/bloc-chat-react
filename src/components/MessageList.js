@@ -15,6 +15,7 @@ class MessageList extends Component {
   }
 
   componentDidMount() {
+    console.log('componentDidMount')
     this.messagesRef.on("child_added", snapshot => {
 
       const message = snapshot.val();

@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.fontSize": 20,
+    "terminal.integrated.fontWeight": "bold",
+    "editor.wordWrap": "on"
+}
