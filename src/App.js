@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as firebase from 'firebase';
-import 'firebase/auth';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import User from './components/User';
@@ -17,7 +16,6 @@ var config = {
   firebase.initializeApp(config);
 
 
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -27,6 +25,7 @@ class App extends Component {
     };
 
     this.setActiveRoom=this.setActiveRoom.bind(this);
+    this.setActiveUser=this.setActiveUser.bind(this);
   }
 
   setActiveRoom(clickedRoom){
