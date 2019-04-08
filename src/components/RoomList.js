@@ -54,8 +54,8 @@ class RoomList extends Component {
     <React.Fragment>
 
         <div className="listOfRooms">
-          {this.state.rooms.map((room, i) => (
-            <p key={i} onClick={() => this.props.setActiveRoom(room)}>
+          {this.state.rooms.map((room, id) => (
+            <p key={id} onClick={() => this.props.setActiveRoom(room)}>
             {room.name}<br/></p>
           ))}
 

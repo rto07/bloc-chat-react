@@ -17,7 +17,6 @@ class MessageList extends Component {
   componentDidMount() {
     console.log('componentDidMount')
     this.messagesRef.on("child_added", snapshot => {
-
       const message = snapshot.val();
       message.key = snapshot.key;
       this.setState({ messages: this.state.messages.concat(message) });
@@ -37,8 +36,10 @@ handleSubmit(newMessage) {
       username: this.props.currentUser ? this.props.currentUser: "userOne",
       content: this.state.newMessage,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      roomId: this.props.activeRoomId
+      roomId: this.props.activeRoom
     });
+      console.log('submitted');
+
   }
 
   render() {
@@ -54,12 +55,12 @@ handleSubmit(newMessage) {
             {this.state.messages.filter(
                 message => {
                     return message.roomId === this.props.activeRoomId}).map((
-                            message, i) => (
+                            message, id) => (
                               <div>
-                                <p key={i}>Message: {message.content}</p>
-                                <p key={i}>Chatroom: {message.roomId}</p>
-                                <p key={i}>Username: {message.username}</p>
-                                <p key={i}>Sent at: {message.sentAt}</p>
+                                <p key={id}>Content: {message.newMessage}</p>
+                                <p key={id}>Chatroom: {message.roomId}</p>
+                                <p key={id}>Username: {message.username}</p>
+                                <p key={id}>Sent at: {message.sentAt}</p>
                                 <br/>
                               </div>
                             ))};
