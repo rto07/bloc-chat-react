@@ -20,9 +20,10 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      activeRoom:'',
-      activeUser:'',
-    };
+      activeRoom:''
+        };
+    this.setActiveRoom=this.setActiveRoom.bind(this);
+
   }
 
   setActiveRoom(clickedRoom){
@@ -32,11 +33,11 @@ class App extends Component {
     console.log(clickedRoom);
   };
 
-  setUser(userStatus){
+  setUser(user){
     this.setState({
-      activeUser : userStatus.MessageList.username
+      user : user
     });
-    console.log(userStatus);
+    console.log(user);
   };
 
 
@@ -54,30 +55,37 @@ class App extends Component {
             <RoomList 
               firebase={firebase}
               setActiveRoom={
-                this.setActiveRoom.bind(this)
+                this.setActiveRoom
+              }
+              activeRoom={
+                this.state.activeRoom
               }/>
           </div>
 
 
           <div className='messageList'>
               <MessageList
+                firebase={firebase}
                 activeRoom={
                   this.state.activeRoom
                 }
-                firebase={firebase}/>
+                setActiveRoom={
+                  this.setActiveRoom
+                } />
           </div>
  
           {<div className='User'>
               <User
+                firebase={firebase}
                 setUser={
                   this.setUser.bind(this)
                 }
-                firebase={firebase}/>
+                user={
+                    this.state.user
+                }/>
           </div> }
 
       </div>
-
-
     );
   }
 }
