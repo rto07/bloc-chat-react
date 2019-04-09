@@ -33,7 +33,7 @@ handleChange(e) {
 
 handleSubmit(newMessage) {
     this.messagesRef.push({
-      username: this.props.User ? this.props.User: "Guest",
+      username: this.props.setUser ? this.props.setUser: "Guest",
       content: this.state.newMessage,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       roomId: this.props.activeRoom
