@@ -18,7 +18,7 @@ class User extends Component{
 
      signIn(){
         var provider = new this.props.firebase.auth.GoogleAuthProvider();
-        this.props.firebase.auth().signInWithRedirect(provider)
+        this.props.firebase.auth().signInWithRedirect(provider);
      };
 
      signOut(){
@@ -31,7 +31,7 @@ class User extends Component{
         <div >
 
             <h3 className="seeUsername">
-              {this.props.user ? this.props.user.displayName : "Guest"}
+              {this.props.username ? this.props.username.displayName : "Guest"}
             </h3>
 
           <button className='signInButton' onClick={this.signIn=this.signIn.bind(this)}> Sign In</button>

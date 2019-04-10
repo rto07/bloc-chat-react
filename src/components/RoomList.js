@@ -51,7 +51,7 @@ class RoomList extends Component {
 
     render() {
         return (
-    <React.Fragment>
+
 
         <div className="listOfRooms">
           {this.state.rooms.map((room, id) => (
@@ -59,7 +59,7 @@ class RoomList extends Component {
             {room.name}<br/></p>
           ))}
 
-        </div>
+   
 
         <div className="form">
             <form
@@ -83,7 +83,8 @@ class RoomList extends Component {
           </form>
         </div>
 
-    </React.Fragment>
+        </div>
+
 
     )
    }

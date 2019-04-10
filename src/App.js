@@ -23,8 +23,6 @@ class App extends Component {
       activeRoom:'',
       username:''
         };
-    this.setActiveRoom=this.setActiveRoom.bind(this);
-
   }
 
   setActiveRoom(clickedRoom){
@@ -52,11 +50,22 @@ class App extends Component {
         </header>
 
        
+        <div className='User'>
+              <User
+                firebase={firebase}
+                setUser={
+                  this.setUser.bind(this)
+                }
+                username={
+                    this.state.username
+                }/>
+          </div> 
+          
           <div className='roomList'>
             <RoomList 
               firebase={firebase}
               setActiveRoom={
-                this.setActiveRoom
+                this.setActiveRoom=this.setActiveRoom.bind(this)
               }
               activeRoom={
                 this.state.activeRoom
@@ -74,17 +83,6 @@ class App extends Component {
                   this.setActiveRoom
                 } />
           </div>
- 
-          <div className='User'>
-              <User
-                firebase={firebase}
-                setUser={
-                  this.setUser.bind(this)
-                }
-                user={
-                    this.state.user
-                }/>
-          </div> 
 
       </div>
     );
