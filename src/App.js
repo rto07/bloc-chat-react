@@ -21,7 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom:'',
-      username:''
+      username:null
         };
   }
 
@@ -34,7 +34,7 @@ class App extends Component {
 
   setUser(user){
     this.setState({
-      user : user
+      username : user
     });
     console.log(user);
   };
@@ -53,6 +53,12 @@ class App extends Component {
         <div className='User'>
               <User
                 firebase={firebase}
+                setActiveRoom={
+                  this.setActiveRoom=this.setActiveRoom.bind(this)
+                }
+                activeRoom={
+                  this.state.activeRoom
+                }
                 setUser={
                   this.setUser.bind(this)
                 }
@@ -69,6 +75,12 @@ class App extends Component {
               }
               activeRoom={
                 this.state.activeRoom
+              }
+              setUser={
+                this.setUser.bind(this)
+              }
+              username={
+                  this.state.username
               }/>
           </div>
 
@@ -76,12 +88,18 @@ class App extends Component {
           <div className='messageList'>
               <MessageList
                 firebase={firebase}
+                setActiveRoom={
+                  this.setActiveRoom=this.setActiveRoom.bind(this)
+                }
                 activeRoom={
                   this.state.activeRoom
                 }
-                setActiveRoom={
-                  this.setActiveRoom
-                } />
+                setUser={
+                  this.setUser.bind(this)
+                }
+                username={
+                    this.state.username
+                }/>
           </div>
 
       </div>

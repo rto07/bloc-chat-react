@@ -4,14 +4,17 @@ class User extends Component{
     constructor(props){
         super(props);
         this.state={
-          users:''
+          users:['']
         }
+        this.signIn=this.signIn.bind(this);
+        this.signOut=this.signOut.bind(this);
      } 
      
      componentDidMount(){
         console.log('componentDidMount');
         this.props.firebase.auth().onAuthStateChanged(user => {
           this.props.setUser(user);
+          console.log(user);
         });
       }
 
@@ -34,8 +37,8 @@ class User extends Component{
               {this.props.username ? this.props.username.displayName : "Guest"}
             </h3>
 
-          <button className='signInButton' onClick={this.signIn=this.signIn.bind(this)}> Sign In</button>
-          <button className='signOutButton' onClick={this.signOut=this.signOut.bind(this)}>Sign Out</button>
+          <button className='signInButton' onClick={this.signIn}> Sign In</button>
+          <button className='signOutButton' onClick={this.signOut}>Sign Out</button>
 
         </div>
        )
