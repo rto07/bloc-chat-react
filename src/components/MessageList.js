@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 
-
 class MessageList extends Component {
   constructor(props){
     super(props);
@@ -45,8 +44,7 @@ handleSubmit(newMessage) {
   render() {
 
     return (
-    <React.Fragment>
-
+      <div>
         <div className="activeRoom">
             Active Room: {this.props.activeRoom}
         </div>
@@ -89,8 +87,7 @@ handleSubmit(newMessage) {
 
             </form>
         </div>
-
-    </React.Fragment>
+        </div>
     )
   }
 }

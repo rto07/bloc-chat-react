@@ -4,7 +4,7 @@ class User extends Component{
     constructor(props){
         super(props);
         this.state={
-          users:['']
+          users:[]
         }
         this.signIn=this.signIn.bind(this);
         this.signOut=this.signOut.bind(this);
