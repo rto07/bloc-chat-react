@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class MessageList extends Component {
   constructor(props){
     super(props);
@@ -33,7 +32,7 @@ handleChange(e) {
 handleSubmit(newMessage) {
     this.messagesRef.push({
       username: this.props.username ? this.props.username.displayName : "Guest",
-      content: this.state.newMessage,
+      message: this.state.newMessage,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       roomId: this.props.activeRoom
     });
@@ -45,29 +44,15 @@ handleSubmit(newMessage) {
 
     return (
       <div>
-        <div className="activeRoom">
-            Active Room: {this.props.activeRoom}
-        </div>
-
-        <div className="listOfMessages">
-            {this.state.messages.filter(
-                message => {
-                    return message.roomId === this.props.activeRoomId}).map((
-                            message, id) => (
-                              <div>
-                                <p key={id}>Content: {message.newMessage}</p>
-                                <p key={id}>Chatroom: {message.roomId}</p>
-                                <p key={id}>Username: {message.username}</p>
-                                <p key={id}>Sent at: {message.sentAt}</p>
-                                <br/>
-                              </div>
-                            ))};
+        <div className="chatInfo">
+          <p>Username: <b>{this.props.username ? this.props.username.displayName : "Guest"}</b></p>
+           <p>Room Name: <b>{this.props.activeRoom}</b></p>
+            <p>Message:<b>{this.state.newMessage}</b></p>
         </div>
 
         <div className="form">
             <form 
               onSubmit={e => {
-                e.preventDefault();
                 this.handleSubmit(this.state.newMessage);
               }}>  
 

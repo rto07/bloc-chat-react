@@ -36,52 +36,51 @@ class RoomList extends Component {
         this.roomsRef.push({
             name: this.state.newChatroom
         });
-        
-        this.setState({
-            newChatroom:''
-        });
 
-        console.log('submitted: '+this.state.newChatroom);
+        this.setState({
+          newChatroom:''
+        });
+          console.log('submitted: '+this.state.newChatroom);
     };
 
-    clickRoom(room) {
-        this.props.setActiveRoom(room.name);
-    }
+    // deleteRoom(room){
+    //   this.props.removeRoom(room.name);
+    // }
 
-
-    render() {
+   render() {
         return (
 
 
         <div className="listOfRooms">
-          {this.state.rooms.map((room, id) => (
-            <p key={id} onClick={() => this.props.setActiveRoom(room)}>
-            {room.name}<br/></p>
-          ))}
 
-   
+          <div className="form">
+              <form
+                onSubmit={e => {
+                  e.preventDefault();
+                  this.handleSubmit(this.state.newChatroom);
+                }}>
+          
+              <input
 
-        <div className="form">
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                this.handleSubmit(this.state.newChatroom);
-              }}>
-        
-            <input
+                type="text"
+                id="roomName"
+                value={this.state.newChatroom}
+                placeholder="Chatroom"
+                onChange={e => this.handleChange(e)}
 
-              type="text"
-              id="roomName"
-              value={this.state.newChatroom}
-              placeholder="Chatroom"
-              onChange={e => this.handleChange(e)}
+              />
 
-            />
+              <input type="submit"/>
 
-            <input type="submit"/>
-
-          </form>
-        </div>
+              <div className='roomButtons'>
+                {this.state.rooms.map((room, id) => (
+                <button key={id} onClick={() => this.props.setActiveRoom(room)}>{room.name}
+                </button>
+                ))
+                }
+              </div>
+            </form>
+          </div>
 
         </div>
 

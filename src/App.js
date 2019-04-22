@@ -21,6 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom:'',
+      // deletedRoom:'',
       username:null
         };
   }
@@ -31,6 +32,13 @@ class App extends Component {
     });
     console.log(clickedRoom);
   };
+
+  // removeRoom(deletedRoom){
+  //   this.setState({
+  //     activeRoom:deletedRoom.name
+  //   })
+  //   console.log(deletedRoom)
+  // };
 
   setUser(user){
     this.setState({
@@ -44,9 +52,9 @@ class App extends Component {
     return (
       <div className='App'>
         <header>
-          <h2>
-            Bloc Chat
-          </h2>
+          <h1>
+            BLOC CHAT
+          </h1>
         </header>
 
        
@@ -59,8 +67,14 @@ class App extends Component {
                 activeRoom={
                   this.state.activeRoom
                 }
+                // removeRoom={
+                //   this.removeRoom=this.removeRoom.bind(this)
+                // }
+                // deletedRoom={
+                //   this.state.deletedRoom
+                // }
                 setUser={
-                  this.setUser.bind(this)
+                  this.setUser=this.setUser.bind(this)
                 }
                 username={
                     this.state.username
@@ -76,8 +90,14 @@ class App extends Component {
               activeRoom={
                 this.state.activeRoom
               }
+              // removeRoom={
+              //   this.removeRoom=this.removeRoom.bind(this)
+              // }
+              // deletedRoom={
+              //   this.state.deletedRoom
+              // }
               setUser={
-                this.setUser.bind(this)
+                this.setUser=this.setUser.bind(this)
               }
               username={
                   this.state.username
@@ -94,8 +114,14 @@ class App extends Component {
                 activeRoom={
                   this.state.activeRoom
                 }
+                // removeRoom={
+                //   this.removeRoom=this.removeRoom.bind(this)
+                // }
+                // deletedRoom={
+                //   this.state.deletedRoom
+                // }
                 setUser={
-                  this.setUser.bind(this)
+                  this.setUser=this.setUser.bind(this)
                 }
                 username={
                     this.state.username

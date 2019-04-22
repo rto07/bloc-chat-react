@@ -1,14 +1,15 @@
-.App {
-  text-align: center;
+.chatInfo{
+  font-family: 'Helvetica';
+  font-size: 18px;
+  padding-left: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1{
+  font-size: 36px;
+  padding-left: 50px;  
+}
+
+.roomButtons{
+  padding-right:50px;
+  margin:25px;
 }
