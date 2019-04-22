@@ -21,7 +21,6 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom:'',
-      // deletedRoom:'',
       username:null
         };
   }
@@ -33,18 +32,11 @@ class App extends Component {
     console.log(clickedRoom);
   };
 
-  // removeRoom(deletedRoom){
-  //   this.setState({
-  //     activeRoom:deletedRoom.name
-  //   })
-  //   console.log(deletedRoom)
-  // };
-
   setUser(user){
     this.setState({
       username : user
     });
-    console.log(user);
+console.log(user);
   };
 
 
@@ -67,12 +59,7 @@ class App extends Component {
                 activeRoom={
                   this.state.activeRoom
                 }
-                // removeRoom={
-                //   this.removeRoom=this.removeRoom.bind(this)
-                // }
-                // deletedRoom={
-                //   this.state.deletedRoom
-                // }
+
                 setUser={
                   this.setUser=this.setUser.bind(this)
                 }
@@ -90,12 +77,7 @@ class App extends Component {
               activeRoom={
                 this.state.activeRoom
               }
-              // removeRoom={
-              //   this.removeRoom=this.removeRoom.bind(this)
-              // }
-              // deletedRoom={
-              //   this.state.deletedRoom
-              // }
+
               setUser={
                 this.setUser=this.setUser.bind(this)
               }
@@ -114,12 +96,7 @@ class App extends Component {
                 activeRoom={
                   this.state.activeRoom
                 }
-                // removeRoom={
-                //   this.removeRoom=this.removeRoom.bind(this)
-                // }
-                // deletedRoom={
-                //   this.state.deletedRoom
-                // }
+
                 setUser={
                   this.setUser=this.setUser.bind(this)
                 }

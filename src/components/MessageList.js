@@ -32,7 +32,7 @@ handleChange(e) {
 handleSubmit(newMessage) {
     this.messagesRef.push({
       username: this.props.username ? this.props.username.displayName : "Guest",
-      message: this.state.newMessage,
+      content: this.state.newMessage,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       roomId: this.props.activeRoom
     });
@@ -44,15 +44,29 @@ handleSubmit(newMessage) {
 
     return (
       <div>
-        <div className="chatInfo">
-          <p>Username: <b>{this.props.username ? this.props.username.displayName : "Guest"}</b></p>
-           <p>Room Name: <b>{this.props.activeRoom}</b></p>
-            <p>Message:<b>{this.state.newMessage}</b></p>
+        <div className="activeRoom">
+            Active Room: {this.props.activeRoom}
+        </div>
+
+        <div className="listOfMessages">
+            {this.state.messages.filter(
+                message => {
+                    return message.roomId === this.props.activeRoom}).map((
+                            message, id) => (
+                              <div key={id} >
+                                <p>Content: {message.newMessage}</p>
+                                <p>Chatroom: {message.roomId}</p>
+                                <p>Username: {message.username}</p>
+                                <p>Sent at: {message.sentAt}</p>
+                                <br/>
+                              </div>
+                            ))}
         </div>
 
         <div className="form">
             <form 
               onSubmit={e => {
+                e.preventDefault();
                 this.handleSubmit(this.state.newMessage);
               }}>  
 
