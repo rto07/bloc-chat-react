@@ -54,7 +54,7 @@ handleSubmit(newMessage) {
                     return message.roomId === this.props.activeRoom}).map((
                             message, id) => (
                               <div key={id} >
-                                <p>Content: {message.newMessage}</p>
+                                <p>Content: {message.content}</p>
                                 <p>Chatroom: {message.roomId}</p>
                                 <p>Username: {message.username}</p>
                                 <p>Sent at: {message.sentAt}</p>

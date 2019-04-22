@@ -71,15 +71,15 @@ class RoomList extends Component {
               />
 
               <input type="submit"/>
+              </form>
 
-              <div className='roomButtons'>
+              <div className='selectRoom'>
                 {this.state.rooms.map((room, id) => (
                 <button key={id} onClick={() => this.props.setActiveRoom(room)}>{room.name}
                 </button>
                 ))
                 }
               </div>
-            </form>
           </div>
 
         </div>
