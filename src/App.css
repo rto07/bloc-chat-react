@@ -1,15 +1,63 @@
-.chatInfo{
-  font-family: 'Helvetica';
-  font-size: 18px;
-  padding-left: 50px;
+.App{
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1{
   font-size: 36px;
-  padding-left: 50px;  
+  color: white;
+  padding: 50px 10px 50px 100px; 
+  background-color: rgb(58, 57, 57);
 }
 
-.roomButtons{
-  padding-right:50px;
-  margin:25px;
+.seeUsername{
+  color: red;
+  font-family:Arial, Helvetica, sans-serif;
+  margin-left: 75px;
+}
+
+.signInButton{
+  position: relative;
+  color: white;
+  background-color:lightcoral;
+  margin-left:150px;
+  border-radius: 12px;
+  border:0px;
+  padding: 5px 10px 5px 10px ;
+}
+
+.signOutButton{
+  position: relative;
+  font-family: Helvetica, sans-serif, heavy;
+  margin-left:10px;
+  color: white;
+  background-color:lightcoral;
+  border-radius: 12px;
+  border: 0px;
+  padding: 5px 10px 5px 10px ;
+}
+
+.activeRoom{
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 25px 0px  60px 100px;
+}
+
+.form{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 75px;
+  margin: 50px;
+}
+
+.listOfMessages{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(66, 66, 66);
+  color: white;
+  margin-left: 500px;
+  padding: 100px;
+  position: absolute;
+  display: inherit;
+}
+
+.selectRoom{
+  position: relative;
+  padding: 50px 100px 50px 50px;
 }

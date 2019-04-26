@@ -33,6 +33,10 @@ class User extends Component{
 
         <div >
 
+            <h3 className="seeUsername">
+              {this.props.username ? this.props.username.displayName : "Guest"}
+            </h3>
+
           <button className='signInButton' onClick={this.signIn}> Sign In</button>
           <button className='signOutButton' onClick={this.signOut}>Sign Out</button>
 

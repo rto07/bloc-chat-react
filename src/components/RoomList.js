@@ -7,7 +7,8 @@ class RoomList extends Component {
 
         this.state = {
             rooms: [],
-            newChatroom:''
+            newChatroom:'',
+            // isHovered: false
         };
 
         this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -43,9 +44,9 @@ class RoomList extends Component {
           console.log('submitted: '+this.state.newChatroom);
     };
 
-    // deleteRoom(room){
-    //   this.props.removeRoom(room.name);
-    // }
+    // removeRoom(event){
+    //   this.roomsRef.splice({name:this.state.room})
+    // };
 
    render() {
         return (
@@ -80,6 +81,12 @@ class RoomList extends Component {
                 ))
                 }
               </div>
+
+              {/* <div className="roomRemoval">
+                <button >
+
+                </button>
+              </div> */}
           </div>
 
         </div>

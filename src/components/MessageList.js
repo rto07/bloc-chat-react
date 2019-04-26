@@ -36,8 +36,10 @@ handleSubmit(newMessage) {
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       roomId: this.props.activeRoom
     });
+    this.setState({
+      newMessage:''
+    });
       console.log('submitted');
-
   }
 
   render() {
@@ -45,7 +47,7 @@ handleSubmit(newMessage) {
     return (
       <div>
         <div className="activeRoom">
-            Active Room: {this.props.activeRoom}
+            {this.props.activeRoom}
         </div>
 
         <div className="listOfMessages">
